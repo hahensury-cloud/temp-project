@@ -1,6 +1,15 @@
 # Harness Engineering Template
 
-Next.js 16 + React 19 프로젝트 템플릿
+Claude Code 기반 **Spec-Driven Development** 워크플로우를 그대로 사용할 수 있도록 미리 구성된 Next.js 16 + React 19 프로젝트 템플릿입니다.
+
+## 개요
+
+이 템플릿은 단순한 Next.js 스타터가 아니라, AI 페어 프로그래밍을 위한 **하네스(harness)** 입니다.
+
+- **Spec-Driven**: `Ideate → Specify → Sketch → Plan → Build → Compound` 6단계를 슬래시 명령(`/idea-refine`, `/write-spec`, …)으로 실행하며, 각 단계의 산출물은 `artifacts/<feature>/`에 누적됩니다.
+- **품질 게이트 내장**: 파일 편집 직후 ESLint auto-fix가 자동 실행되고, 워크트리 생성 시 main 동기화·`.env` 복사·의존성 설치가 자동화돼 있습니다 (`.claude/hooks/`).
+- **테스트 우선**: spec.md의 Success Criteria가 곧 수용 기준이며, Vitest(단위/통합) + Playwright(E2E)로 검증합니다.
+- **shadcn/ui + Tailwind 4**: Radix UI / Base UI 기반의 디자인 시스템이 `components/ui/`에 사전 설치돼 있습니다.
 
 ## 기술 스택
 
@@ -11,16 +20,25 @@ Next.js 16 + React 19 프로젝트 템플릿
 - **Lint**: ESLint
 - **Package Manager**: Bun
 
-## 시작하기
+## 실행 방법
+
+### 1. 의존성 설치
 
 ```bash
 bun install
+```
+
+### 2. 개발 서버 실행
+
+```bash
 bun dev
 ```
 
 [http://localhost:3000](http://localhost:3000)에서 결과를 확인할 수 있습니다.
 
-E2E 테스트를 처음 실행하기 전에 Chromium을 설치합니다:
+### 3. (선택) E2E 테스트 준비
+
+Playwright를 처음 실행하기 전에 Chromium을 설치합니다:
 
 ```bash
 bunx playwright install chromium
@@ -89,8 +107,8 @@ spec.md와 wireframe을 참조해 구현 계획을 수립합니다. vertical sli
 
 ### 5. Build (`/execute-plan`)
 
-Team Lead로서 plan.md의 Task를 한 번에 하나씩 직접 구현합니다. TDD (RED → GREEN) 규율을 따르고, Task당 conventional commit 하나를 만듭니다. 완료 후 사용자에게 spec.md 대비 검증을 요청하며, 판단은 `artifacts/<feature>/decisions.md`에 Harness Signal과 함께 기록합니다.
+Team Lead로서 plan.md의 Task를 한 번에 하나씩 직접 구현합니다. TDD (RED → GREEN) 규율을 따르고, Task당 conventional commit 하나를 만듭니다. 완료 후 사용자에게 spec.md 대비 검증을 요청하며, 판단은 `artifacts/<feature>/learnings.md`에 Harness Signal과 함께 기록합니다.
 
 ### 6. Compound (`/compound`)
 
-`decisions.md`에 누적된 판단을 읽어 반복된 패턴을 감지하고, Skill/Hook/Rule/CLAUDE.md로 승격할 후보를 제안합니다. 사용자 승인(Ask-first) 후에만 적용합니다.
+`learnings.md`에 누적된 판단을 읽어 반복된 패턴을 감지하고, Skill/Hook/Rule/CLAUDE.md로 승격할 후보를 제안합니다. 사용자 승인(Ask-first) 후에만 적용합니다.
