@@ -1,5 +1,7 @@
 # Harness Engineering Template
 
+배포 URL: https://temp-project-hahensury-7910s-projects.vercel.app
+
 Claude Code 기반 **Spec-Driven Development** 워크플로우를 그대로 사용할 수 있도록 미리 구성된 Next.js 16 + React 19 프로젝트 템플릿입니다.
 
 ## 개요
